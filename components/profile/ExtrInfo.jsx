@@ -35,7 +35,7 @@ const ExtrInfo = ({ userInfo }) => {
         <View className="flex-row justify-between">
           <View>
             <Text className="font-interr text-white-300 text-[12px] text-center">
-              233
+              {userInfo.following}
             </Text>
             <Text className="font-interr text-white-300 text-[12px] text-center">
               Following
@@ -51,7 +51,7 @@ const ExtrInfo = ({ userInfo }) => {
           </View>
           <View>
             <Text className="font-interr text-white-300 text-[12px] text-center">
-              233
+              {userInfo.followers}
             </Text>
 
             <Text className="font-interr text-white-300 text-[12px] text-center">
@@ -66,7 +66,7 @@ const ExtrInfo = ({ userInfo }) => {
           </View>
 
           <View>
-            <RateValue averageRatedValue={10} />
+            <RateValue averageRatedValue={userInfo.rating} />
             <Text className="font-interr text-white-300 text-[12px] text-center">
               Rating
             </Text>

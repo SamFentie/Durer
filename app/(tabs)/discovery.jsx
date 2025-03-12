@@ -8,7 +8,6 @@ import { shopesData } from "../../shopesData";
 import DescoveryDemand from "../../components/demnads/DescoveryDemand";
 import Shopes from "../../components/discovery/Shopes";
 import { router } from "expo-router";
-import LogoutButton from "../../components/LogoutButton";
 import { Button } from "react-native";
 
 
@@ -58,7 +57,6 @@ const Discovery = () => {
         handelDemandesClick={handelDemandesClick}
         handelShopesClick={handelShopesClick}
       />
-      <LogoutButton/>
       {isDemandsactive && <DescoveryDemand demands={demands} />}
       {isShopesActive && <Shopes shopes={shopes} />}
     </SafeAreaView>

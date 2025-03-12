@@ -25,7 +25,7 @@ const ProfileImageCarousel = ({
 }) => {
   const { width } = Dimensions.get("window"); // Ensure this is at the top level of the component
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [profileImage, setProfileImage] = useState(null);
+  const [profileImage, setProfileImage] = useState(setUserProfileImages);
   const [loading, setLoading] = useState(false);
   const [imageLoading, setImageLoading] = useState(
     Array(profileImages.length).fill(true)
@@ -73,9 +73,9 @@ const ProfileImageCarousel = ({
           marginBottom: 10,
         }}
       >
-        {profileImage&&profileImages.map((_, index) => (
+        {profileImage&&
           <View
-            key={index}
+           
             style={{
               width: 10,
               height: 10,
@@ -84,11 +84,11 @@ const ProfileImageCarousel = ({
               height: 4,
               borderRadius: 6,
               marginHorizontal: 3,
-              backgroundColor: index === currentIndex ? "#A6A746" : "#ccc",
+              backgroundColor: "#A6A746",
               margin: 5,
             }}
           />
-        ))}
+        }
         <Text style={styles.indicator} className="font-interr">
           {currentIndex + 1}/{profileImages.length}
         </Text>

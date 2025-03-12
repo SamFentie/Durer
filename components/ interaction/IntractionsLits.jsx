@@ -18,7 +18,7 @@ const IntractionsLits = ({ intractionData }) => {
     );
     
     setNumberOFWeCanPrepare(
-      intractionData.length - Number(numberOfWehavit)
+      intractionData.length - countInteractionTypeZero(intractionData)
     );
   }, []);
   return (
