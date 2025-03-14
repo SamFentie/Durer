@@ -56,7 +56,9 @@ const Demands = () => {
           </View>
         ) : (
           
-          <MainDemands demands={demand} />
+          <MainDemands demands={demand} >
+            <Text className="ext-lg font-interreb text-[20px] mb-[6px] mt-2 text-white-600 ml-4">Demands</Text>
+          </MainDemands>
         )}
       </View>
       <StatusBar style="auto" />

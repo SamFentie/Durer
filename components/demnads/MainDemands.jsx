@@ -2,7 +2,7 @@ import { FlatList, StyleSheet,  View ,Text} from "react-native";
 import React, { useState } from "react";
 import MainDemandsSimplifyed from "./MainDemandsSimplifyed";
 
-const MainDemands = ({ demands }) => {
+const MainDemands = ({ demands ,children }) => {
   const [currentSound, setCurrentSound] = useState(null);
   const [playingId, setPlayingId] = useState(null);
 
@@ -12,6 +12,7 @@ const MainDemands = ({ demands }) => {
         <FlatList
           className="mt-7"
           data={demands}
+          ListHeaderComponent={children}
           renderItem={({ item, index }) => (
             <MainDemandsSimplifyed
               item={item}
@@ -26,7 +27,7 @@ const MainDemands = ({ demands }) => {
           showsVerticalScrollIndicator={false}
         />
       ):<Text  className={` text-xs`}
-      style={{ color: "#96A0AA" }}>{demands}</Text>}
+      style={{ color: "#96A0AA" }}>No Demand Found.</Text>}
     </View>
   );
 };

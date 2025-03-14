@@ -4,7 +4,7 @@ import InteractionsSimplefied from "./InteractionsSimplefied";
 
 const MainInteractions = ({ intractions }) => {
   return (
-    <View>
+    <View className="mx-2">
       {intractions && (
         <FlatList
           className="mt-7"

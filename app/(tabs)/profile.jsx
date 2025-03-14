@@ -11,10 +11,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { icons } from "../../constants";
 import MainDemands from "../../components/demnads/MainDemands";
-
+import moment from "moment";
 import { SIZES, COLORS, FONTS } from "../../constants/theme";
 import { demandData } from "../../demandsData";
 import LogoutButton from "../../components/LogoutButton";
+import images from "../../constants/images";
+
 
 const sampleProfileData = {
   id: "sample-id",
@@ -59,61 +61,64 @@ const sampleProfileData = {
   ],
   demands: [
     {
-      id: 1,
-      title: "I need used office furniture",
-      tags: ["used", "furniture", "vintage"],
-      rating: 4,
-      companyName: "Company name"
-    },
-    {
-      id: 2,
-      title: "Looking for electronics supplier",
-      tags: ["electronics", "wholesale", "supplier"],
-      rating: 5,
-      companyName: "Tech Solutions Ltd"
-    },
-    {
-      id: 3,
-      title: "Need construction materials",
-      tags: ["construction", "building", "materials"],
-      rating: 4,
-      companyName: "Build Master Co."
-    },
-    {
-      id: 4,
-      title: "Seeking food packaging supplies",
-      tags: ["packaging", "food", "wholesale"],
-      rating: 3,
-      companyName: "Food Pack Ethiopia"
-    },
-    {
-      id: 5,
-      title: "Looking for textile manufacturer",
-      tags: ["textile", "manufacturing", "fabric"],
-      rating: 5,
-      companyName: "Fashion House"
-    },
-    {
-      id: 6,
-      title: "Need IT equipment for office",
-      tags: ["computers", "IT", "office"],
-      rating: 4,
-      companyName: "Digital Solutions"
-    },
-    {
-      id: 7,
-      title: "Seeking coffee supplier",
-      tags: ["coffee", "wholesale", "organic"],
-      rating: 5,
-      companyName: "Café Express"
-    },
-    {
-      id: 8,
-      title: "Need industrial cleaning equipment",
-      tags: ["industrial", "cleaning", "equipment"],
-      rating: 4,
-      companyName: "Clean Pro Services"
-    }
+        status: false,
+        id: 1,
+        text_question: "I need drone camera for 4 days rent June 8- June 11",
+        image_question: images.testimage,
+        voice_question:
+          "https://assets.mixkit.co/active_storage/sfx/995/995-preview.mp3",
+        further_question: [
+          " how much is the price?",
+          "how much is the price?",
+          "how much is the price?",
+        ],
+        demand_category: ["Clothing", "dgsahdsdsadbsdsdbscccc", "Designer"],
+        is_answered: "#Designer #dgsahdsdsadbsdsdbscccc",
+        user: "Siham Joo",
+        user_profile: images.profile,
+        number_of_intreactions: 3,
+        createdAt: moment(new Date(), "YYYYMMDD").fromNow(),
+      },
+      {
+        status: true,
+        id: 2,
+        text_question:
+          "I need a green Fancy dress for photo shoot. I need a expert designer to design the dress. I need it for May  0",
+        image_question: images.shope,
+        voice_question: null,
+        further_question: [
+          " how much is the price?",
+          "how much is the price?",
+          "how much is the price?",
+        ],
+        demand_category: ["Designer", "Designer", "Designer"],
+        is_answered: "#Designer #clothing",
+        user: "Amand Joo",
+        user_profile: images.profile,
+        number_of_intreactions: 126,
+        createdAt: moment(new Date(), "YYYYMMDD").fromNow(),
+      },
+      {
+        status: true,
+        id: 3,
+        text_question:
+          "I need a green Fancy dress for photo shoot. I need a expert designer to design the dress. I need it for May  0",
+    
+        image_question: null,
+        voice_question:
+          "https://assets.mixkit.co/active_storage/sfx/1714/1714-preview.mp3",
+        further_question: [
+          " how much is the price?",
+          "how much is the price?",
+          "how much is the price?",
+        ],
+        demand_category: ["Designer", "Designer", "Designer"],
+        is_answered: "#Designer #clothing",
+        user: "Siham Joo",
+        user_profile: images.profile,
+        number_of_intreactions: 67,
+        createdAt: moment(new Date(), "YYYYMMDD").fromNow(),
+      },
   ]
 }; 
 
@@ -293,8 +298,9 @@ const Profile = () => {
         <Text className="text-lg font-bold ml-4">1/10</Text>
       </View>
 
-      <ScrollView showsVerticalScrollIndicator={false} className="px-4">
+      <MainDemands demands={sampleProfileData.demands} >
         {/* Shop Logo Section */}
+        <View>
         <View style={styles.logoContainer}>
           <View style={styles.logoBackground}>
             <Text style={styles.shopText}>SHOP</Text>
@@ -432,9 +438,9 @@ const Profile = () => {
             />
             <Text className="ml-2 font-bold">Demands</Text>
           </View>
-          <MainDemands demands={demandData} />
         </View>
-      </ScrollView>
+        </View>
+        </MainDemands>
     </SafeAreaView>
   );
 };

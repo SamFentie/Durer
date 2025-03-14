@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   ScrollView,
   FlatList,
+  Switch
 } from "react-native";
 import { Audio } from "expo-av";
 import React, { useState, useEffect, useCallback } from "react";
@@ -12,8 +13,10 @@ import images from "../../constants/images";
 import ReactToDemand from "./ReactToDemand";
 import FurtherQ from "./FurtherQ";
 import DemandsAudioWaveform from "../audio/DemandsAudioWaveform";
+import ToogleButton from "./Toggle";
 
 const MainDemandsSimplifyed = ({
+  
   item,
   key,
   currentSound,
@@ -24,7 +27,7 @@ const MainDemandsSimplifyed = ({
   const [wehaveIt, setWeHaveIT] = useState(false);
   const [weCanPrepare, setWeCanPrepare] = useState(false);
   const [playbackStatus, setPlaybackStatus] = useState(null);
-
+  const [isEnabled,setIsEnabled]=useState(true)
   const handleAudio = async (audioUrl) => {
     try {
       // If already playing this audio, stop it
@@ -89,7 +92,9 @@ const MainDemandsSimplifyed = ({
     setWeCanPrepare(!weCanPrepare);
     setWeHaveIT(false);
   };
-
+ const toggleSwitch=()=>{
+    setIsEnabled(!isEnabled)
+ }
   return (
     <View className="mb-4 mx-2">
       <View
@@ -167,16 +172,7 @@ const MainDemandsSimplifyed = ({
             </View>
           </View>
           <View className="flex-row items-center gap-2">
-            <Text className="text-[10px] text-white-500  font-interrm">
-              {new Date(item.createdAt)
-                .toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "2-digit",
-                  year: "numeric",
-                })
-                .replace(",", "")
-                .replace(" ", " ")}
-            </Text>
+            {item.status!==undefined&&<ToogleButton status={item.status}/>}
           </View>
         </View>
 
@@ -203,12 +199,12 @@ const MainDemandsSimplifyed = ({
         </View>
       </View>
 
-      <ReactToDemand
+{item.status===undefined&&<ReactToDemand
         wehaveIt={wehaveIt}
         weCanPrepare={weCanPrepare}
         handelWeHaveIT={handelWeHaveIT}
         handelWeCanPrepare={handelWeCanPrepare}
-      />
+      />}
       {(wehaveIt || weCanPrepare) && (
         <FurtherQ furtherQ={item.further_question} />
       )}

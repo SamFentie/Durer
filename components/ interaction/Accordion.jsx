@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { View, TouchableOpacity, Text, StyleSheet ,Image} from "react-native";
 import { images } from "../../constants";
-const Accordion = ({ title, children }) => {
-  const [expanded, setExpanded] = useState(false);
+const Accordion = ({ title, children ,expandedA, setExpandedA}) => {
+ 
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.header} onPress={() => setExpanded(!expanded)}>
+      <TouchableOpacity style={styles.header} onPress={() => setExpandedA(!expandedA)}>
         <View className="flex-row gap-2 ">
                 <View>
                   <View>
@@ -37,7 +37,7 @@ const Accordion = ({ title, children }) => {
                 </View>
               </View>
       </TouchableOpacity>
-      {expanded && <View style={styles.content}>{children}</View>}
+      {expandedA && <View style={styles.content}>{children}</View>}
     </View>
   );
 };

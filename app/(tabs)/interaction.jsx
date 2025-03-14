@@ -11,7 +11,7 @@ const Interaction = () => {
     intractions && (
       <SafeAreaView className="bg-white-100">
         {intractions?<MainInteractions intractions={intractions} />:
-        <Text>No Data</Text>
+        <Text>No Interaction Data.</Text>
         }
       </SafeAreaView>
     )
