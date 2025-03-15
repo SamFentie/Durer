@@ -14,11 +14,10 @@ import ReactToDemand from "./ReactToDemand";
 import FurtherQ from "./FurtherQ";
 import DemandsAudioWaveform from "../audio/DemandsAudioWaveform";
 import ToogleButton from "./Toggle";
+import Animated from "react-native/Libraries/Animated/Animated";
 
 const MainDemandsSimplifyed = ({
-  
   item,
-  key,
   currentSound,
   setCurrentSound,
   playingId,
@@ -109,7 +108,6 @@ const MainDemandsSimplifyed = ({
           shadowRadius: 4.65,
           elevation: 8,
         }}
-        key={key}
       >
         <View className="flex-row justify-between max-h-80">
           {item.image_question && (
