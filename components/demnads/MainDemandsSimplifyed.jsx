@@ -96,7 +96,7 @@ const MainDemandsSimplifyed = ({
     setIsEnabled(!isEnabled)
  }
   return (
-    <View className="mb-4">
+    <View className="mb-4 mx-7">
       <View
         className="bg-white-400 rounded-md p-4 relative shadow-md"
         style={{

@@ -194,13 +194,13 @@ const Profile = () => {
   );
 
   return (
-    <SafeAreaView className="flex-1 mx-7 rounded-md">
+    <SafeAreaView className="flex-1 rounded-md">
      
      
       <MainDemands demands={sampleProfileData[0].demands} >
         {/* Shop Logo Section */}
 
-        <View>
+        <View className="mx-7 ">
        
         <ImageCarousel images={sampleProfileData[0].profilePictures}/>
         {/* Company Info Section */}

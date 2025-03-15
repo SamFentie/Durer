@@ -40,7 +40,7 @@ const Demands = () => {
   }, [dispatch]);
 
   return (
-    <View className="flex-1 px-5">
+    <View className="flex-1 ">
       <View className="flex-1 pt-4 ">
         {loading ? (
           <View className="flex-1 justify-center items-center">

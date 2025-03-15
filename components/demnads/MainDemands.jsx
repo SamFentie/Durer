@@ -10,7 +10,7 @@ const MainDemands = ({ demands ,children }) => {
     <View className="flex-1">
       {demands ? (
         <FlatList
-          className="mt-7"
+          className=" mt-7"
           data={demands}
           ListHeaderComponent={children}
           renderItem={({ item, index }) => (
