@@ -50,7 +50,6 @@ const Requests = () => {
     const userInfo = await AsyncStorage.getItem("user_info");
     return JSON.parse(userInfo);
   };
-
   const hnadelWantsChange = (e, type) => {
     setIsSubmitting(false);
     switch (type) {

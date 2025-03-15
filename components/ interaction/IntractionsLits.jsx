@@ -25,8 +25,8 @@ const IntractionsLits = ({ intractionData }) => {
     );
   }, []);
   return (
-    <GestureHandlerRootView style={{ flex: 1 }} className="flex-col gap-4 items-center">
-    <View className="flex-row gap-4 items-start">
+    <GestureHandlerRootView style={{ flex: 1 }} className="flex-col  items-center ">
+    <View className="flex-row gap-4 items-start ">
       <View className="flex-row gap-2 ">
           <Accordion title={(numberOfWehavit ? numberOfWehavit: 0)+ " Have it"} expandedA={haveit} setExpandedA={setHaveit}>
               <ScrollView className="max-h-24 border-l-2 border-r-2 border-b-2 border-white-500 rounded-md p-1" nestedScrollEnabled>

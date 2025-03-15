@@ -6,7 +6,8 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState} from "react";
+import { useIsFocused } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { icons } from "../../constants";
@@ -16,13 +17,21 @@ import { SIZES, COLORS, FONTS } from "../../constants/theme";
 import { demandData } from "../../demandsData";
 import LogoutButton from "../../components/LogoutButton";
 import images from "../../constants/images";
-
-
+import { getLocalUser } from "../../context/slices/authSlices";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getUserProfile } from "../../context/api/api";
+import { getUserInfo } from "../../utils/user";
+import ImageCarousel from "../../components/profile/ProfileImages";
 const sampleProfileData = {
   id: "sample-id",
   companyName: "Company name",
   bio: "Bio/slogan",
   productService: "Product or service",
+  profilePictures:[
+      "https://media.istockphoto.com/id/814423752/photo/eye-of-model-with-colorful-art-make-up-close-up.jpg?s=612x612&w=0&k=20&c=l15OdMWjgCKycMMShP8UK94ELVlEGvt7GmB_esHWPYE=",
+      "https://images.unsplash.com/photo-1575936123452-b67c3203c357?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D",
+      "https://cdn3.pixelcut.app/7/20/uncrop_hero_bdf08a8ca6.jpg",
+    ],
   stats: {
     following: "238",
     followers: "55.7K",
@@ -145,11 +154,20 @@ const PropertyCard = ({ title, icon, isExpanded, onPress, children }) => (
 const Profile = () => {
   const router = useRouter();
   const [expandedSection, setExpandedSection] = useState(null);
-
+  const [userInformation,setUserInformation]=useState()
+  const isFocused = useIsFocused();
+  const getUserInfo = async () => {
+    const userIn= await AsyncStorage.getItem("user_info").then(setUserInformation(getUserProfile(user["data"]["id"],user["data"]["token"])));
+    
+    console.log(userInformation["data"])
+    return JSON.parse(userIn);
+  };
   const toggleSection = (section) => {
     setExpandedSection(expandedSection === section ? null : section);
   };
-
+  const userInfo=getUserInfo();
+ 
+ 
   const renderContactInfo = () => (
     <View style={styles.infoContent}>
       <View style={styles.infoRow}>
@@ -285,36 +303,13 @@ const Profile = () => {
   );
 
   return (
-    <SafeAreaView className="bg-white-100 flex-1">
-      {/* Header with back button */}
-      <View className="flex-row items-center px-4 py-2 bg-white-100">
-        <TouchableOpacity onPress={() => router.back()} className="p-2">
-          <Image
-            source={icons.back}
-            style={{ width: 24, height: 24 }}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-        <Text className="text-lg font-bold ml-4">1/10</Text>
-      </View>
-
+    <SafeAreaView className="bg-white-100 flex-1 mx-1 rounded-md">
+     
+     
       <MainDemands demands={sampleProfileData.demands} >
         {/* Shop Logo Section */}
         <View>
-        <View style={styles.logoContainer}>
-          <View style={styles.logoBackground}>
-            <Text style={styles.shopText}>SHOP</Text>
-            <Text style={styles.logoText}>LOGO</Text>
-            <View style={styles.avatarContainer}>
-              <Image
-                source={icons.profile}
-                style={styles.avatar}
-                resizeMode="contain"
-              />
-            </View>
-          </View>
-        </View>
-
+        <ImageCarousel images={sampleProfileData.profilePictures}/>
         {/* Company Info Section */}
         <View className="mt-4">
           <Text className="text-lg font-bold">
@@ -441,6 +436,7 @@ const Profile = () => {
         </View>
         </View>
         </MainDemands>
+    
     </SafeAreaView>
   );
 };

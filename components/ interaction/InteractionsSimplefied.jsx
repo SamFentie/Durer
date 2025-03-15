@@ -5,20 +5,25 @@ import IntractionsLits from "./IntractionsLits";
  
 const InteractionsSimplefied = ({ item }) => {
   return (
-    <View>
-      <View className="bg-white-400 mt-4 rounded-md p-4 relative ">
+    <View className="shadow-xl">
+      <View className="bg-white-400 my-1  p-4 relative">
         <View className="flex-row justify-between max-h-80 ">
           {item.image_question && (
             <View className="w-1/3 max-h-32 rounded-lg border-2 border-white-500">
               <Image
+                style={
+                  {width: "100%", // Make image take full width
+                    height: "100%", // Make image take full height of container
+                    resizeMode: "cover",}
+                }
                 source={item.image_question}
                 resizeMode="contain"
                 tintColor="fff"
-                className="w-full h-full"
+                className="w-full h-full rounded-md"
               />
             </View>
           )}
-          <View className={item.image_question ? "w-2/3 pl-4" : "w-full"}>
+          <View className={item.image_question ? "w-2/3 pl-4 mt-5" : "w-full"}>
             <View>
               <Text>{item.text_question}</Text>
             </View>
@@ -59,9 +64,9 @@ const InteractionsSimplefied = ({ item }) => {
             source={images.shope}
             resizeMode="contain"
             tintColor="fff"
-            className="w-6 h-6"
+            className="w-6 h-6 mr-5"
           />
-          <View className="absolute top-[-10px] right-[2px] w-4 h-4 justify-center items-center p-[2px] bg-white-600 rounded-full">
+          <View className="absolute  right-[2px] w-4 h-4 justify-center items-center p-[2px] bg-white-600 rounded-full">
             <Text className={item.intractions.length > 99? "text-white-500 text-[8px] font-semibold items-center ": `text-white-400 text-[8px] font-semibold items-center `}>
               {item.intractions.length > 99
                 ? 99 + "+"

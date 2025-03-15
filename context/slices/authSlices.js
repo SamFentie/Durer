@@ -1,19 +1,10 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createSlice } from "@reduxjs/toolkit";
 import { router } from "expo-router";
-//get current user
-const getLocalUser = async () => {
-  try {
-    const user_info = await AsyncStorage.getItem("user_info");
-    return user_info ? JSON.parse(user_info) : null;
-  } catch (error) {
-    return null;
-  }
-};
-
 //initial user state
 const initialState = {
-  user: false,
+  user: null,
+  newUser: null,
   error: "",
 };
 export const authSlice = createSlice({
@@ -21,28 +12,13 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     logInUserAction: (state, action) => {
-      if (AsyncStorage.getItem("user_info")) {
-        AsyncStorage.removeItem("user_info");
-        state.user = action.payload;
-        AsyncStorage.setItem("user_info", JSON.stringify(action.payload));
-      } else {
-        state.user = action.payload;
-        AsyncStorage.setItem("user_info", JSON.stringify(action.payload));
-      }
+      state.user = action.payload;
     },
-    registerUserPhaseOne: (state, action) => {
-      state = action.payload;
-      AsyncStorage.setItem(
-        "user_reg_phase_one",
-        JSON.stringify(action.payload)
-      );
-      AsyncStorage.getItem("user_reg_phase_one").then((temporary_userInfo) => {
-        // console.log("temporary data fro reducer " + temporary_userInfo);
-      });
+    holdOTPUserData: (state, action) => {
+      state.newUser = action.payload;
     },
     logOutAction: (state, action) => {
       state.user = null;
-      AsyncStorage.removeItem("user_info");
     },
     setUserAction: (state, action) => {
       state.user = action.payload;
@@ -50,22 +26,44 @@ export const authSlice = createSlice({
   },
 });
 
-export const {
-  logInUserAction,
-  logOutAction,
-  setUserAction,
-  registerUserPhaseOne,
-} = authSlice.actions;
+export const { logInUserAction, logOutAction, setUserAction, holdOTPUserData } =
+  authSlice.actions;
 
 export default authSlice.reducer;
 
 export const loadUser = () => async (dispatch) => {
-  const user_info = await getLocalUser();
-  if (user_info) {
-    dispatch(setUserAction(user_info));
+  try {
+    const user_info = await AsyncStorage.getItem("user_info");
+    if (user_info) {
+      dispatch(setUserAction(JSON.parse(user_info)));
+    }
+  } catch (error) {
+    console.error("Error loading user info:", error);
   }
 };
-
-export const holdPhaseOneReg = () => async (dispatch) => {
-  dispatch(registerUserPhaseOne());
+export const holdUserEmail = (userData) => async (dispatch) => {
+  try {
+    await AsyncStorage.setItem("otpUserData", JSON.stringify(userData));
+    dispatch(holdOTPUserData(userData));
+  } catch (error) {
+    console.error("Error saving user info:", error);
+  }
+};
+export const logIn = (userData) => async (dispatch) => {
+  try {
+    await AsyncStorage.setItem("user_info", JSON.stringify(userData));
+    dispatch(logInUserAction(userData));
+    router.replace("/discovery");
+  } catch (error) {
+    console.error("Error saving user info:", error);
+  }
+};
+export const logOutUser = () => async (dispatch) => {
+  try {
+    await AsyncStorage.removeItem("user_info");
+    dispatch(logOutAction());
+    router.replace("/"); // Redirect to sign-in page
+  } catch (error) {
+    console.error("Error removing user info:", error);
+  }
 };

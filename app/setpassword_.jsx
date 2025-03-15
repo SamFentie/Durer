@@ -3,25 +3,25 @@ import { StatusBar } from "expo-status-bar";
 import { ScrollView, Text, View, Image, TouchableOpacity } from "react-native";
 import { Link, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Checkbox from "expo-checkbox";
+
+import { images } from "../constants";
 import FormField from "../components/FormField";
 import CustomButton from "../components/CustomButton";
-import { registerUser, setPassword } from "../context/api/api";
-import { useDispatch, useSelector } from "react-redux";
+import { activateAccount, setPassword } from "../context/api/api";
+import { useDispatch } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { holdUserEmail } from "../context/slices/authSlices";
 
 const SetPassword = () => {
   const retrievePhaseOneData = async () => {
-    const email = JSON.parse(await AsyncStorage.getItem("otpUserData")).email;
+    const email = JSON.parse(
+      await AsyncStorage.getItem("user_reg_phase_one")
+    ).email;
     const user_name = JSON.parse(
-      await AsyncStorage.getItem("otpUserData")
+      await AsyncStorage.getItem("user_reg_phase_one")
     ).user_name;
+    const userData = { email, user_name };
 
-    const activationCode = JSON.parse(
-      await AsyncStorage.getItem("otpUserData")
-    ).activationCode;
-    const userData = { email, user_name, activationCode };
-    console.log("user", userData);
     return userData;
   };
   const dispatch = useDispatch();
@@ -29,16 +29,20 @@ const SetPassword = () => {
   const [password, setformPassword] = useState(null);
   const [confirm_password, setConfirm_Password] = useState(null);
   const [formError, setFormError] = useState("");
+  const [serverError, setServerError] = useState("");
+  const [serverMessage, setServerMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [agreeToTerms, setAgreeToTerms] = useState(false);
   const handelPAsswordChange = (e) => {
     setformPassword(e);
     setFormError(false);
+    setServerError(false);
     setIsSubmitting(false);
   };
   const handleConfirmPasswordChnage = (e) => {
     setConfirm_Password(e);
     setFormError(false);
+    setServerError(false);
     setIsSubmitting(false);
   };
 
@@ -46,17 +50,13 @@ const SetPassword = () => {
     e.preventDefault();
     const phaseoneData = await retrievePhaseOneData();
     const email = phaseoneData.email;
-    const setPasswordData = {
+    const fromData = {
       email,
       password: password,
       confirm_password: confirm_password,
     };
-    if (!password) {
-      setFormError("Password is required!");
-      return;
-    }
-    if (!confirm_password) {
-      setFormError("Please enter confirm password");
+    if (!password || !confirm_password) {
+      setFormError("All fields are required!");
       return;
     }
     if (password !== confirm_password) {
@@ -68,16 +68,20 @@ const SetPassword = () => {
       return;
     }
     setIsSubmitting(true);
-    setPassword(setPasswordData).then((res) => {
-      if (res.error) {
+
+    setPassword(fromData).then((res) => {
+      if (res.data.err) {
+        setServerError(res.data.err);
+        console.log("password setup error" + res.data.err);
         setIsSubmitting(false);
-        setFormError(res.error);
-        return;
+
+        set;
       } else {
+        setServerMessage(res.data.message);
         setFormError(null);
+        setServerError(null);
         router.push("profileOption");
         setIsSubmitting(false);
-        return;
       }
     });
   };
@@ -93,11 +97,16 @@ const SetPassword = () => {
             Your password must be at least 8 character long.
           </Text>
           {formError && (
-            <Text
-              className="text-white-900 font-interr mt-2"
-              style={{ color: "red" }}
-            >
-              {formError}
+            <Text className="text-white-900 font-interr mt-2">{formError}</Text>
+          )}
+          {serverError && (
+            <Text className="text-white-900 font-interr mt-2">
+              {serverError}
+            </Text>
+          )}
+          {serverMessage && (
+            <Text className="text-green-600 font-interr mt-2">
+              {serverMessage}
             </Text>
           )}
 

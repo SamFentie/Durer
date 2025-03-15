@@ -5,3 +5,5 @@
 + Intercation Page almost done
 + Profile Page done
 + Last Update
++ Profile Picture carosuel 
++ Page polishing

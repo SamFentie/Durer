@@ -25,17 +25,25 @@ import {
 } from "../context/api/api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { holdUserEmail } from "../context/slices/authSlices";
 
 const OptVerification = () => {
   const dispatch = useDispatch();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [serverError, setServerError] = useState(false);
+  const [serverMessage, setServerMessage] = useState(false);
   const router = useRouter();
   const retrievePhaseOneData = async () => {
-    const data = JSON.parse(await AsyncStorage.getItem("otpUserData"));
-    return { email: data?.email, user_name: data?.user_name };
+    const email = JSON.parse(
+      await AsyncStorage.getItem("user_reg_phase_one")
+    ).email;
+    const user_name = JSON.parse(
+      await AsyncStorage.getItem("user_reg_phase_one")
+    ).user_name;
+    const userData = { email, user_name };
+    console.log("================================================================================================")
+    console.log(userData)
+    return userData;
   };
 
   const resendCode = async (e) => {
@@ -44,12 +52,14 @@ const OptVerification = () => {
     await activateAccount(formData).then((res) => {
       if (res.data.err) {
         setServerError(res.data.err);
+        setServerMessage(false);
       } else {
-        dispatch(holdUserEmail(formData));
+        setServerMessage(res.data.message);
+        dispatch(registerUserPhaseOne(formData));
         setServerError(false);
       }
     });
-    // dispatch(holdUserEmail(fromData));
+    // dispatch(registerUserPhaseOne(fromData));
   };
 
   let inputs = [];
@@ -73,17 +83,16 @@ const OptVerification = () => {
       user_name: userCurrentData.user_name,
       activationCode,
     };
+
     registerWithEmail(formData).then((res) => {
-      if (res.error) {
-        setServerError(res.error);
-        setIsSubmitting(false);
-        return;
+      if (res.data.err) {
+        setServerError(res.data.err);
       } else {
-        dispatch(holdUserEmail(formData));
+        setServerMessage(res.data.message);
         router.push("setpassword");
-        setIsSubmitting(false);
       }
     });
+    setIsSubmitting(false);
   };
 
   // useEffect(() => {
@@ -103,6 +112,11 @@ const OptVerification = () => {
           {serverError && (
             <Text className="text-white-900 font-interr text-center my-2">
               {serverError}
+            </Text>
+          )}
+          {serverMessage && (
+            <Text className="text-white-500 font-interr text-center my-2">
+              {serverMessage}
             </Text>
           )}
           <View style={styles.container}>

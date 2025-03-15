@@ -28,12 +28,13 @@ const PhoneNumberByCountry = ({
     setShowPicker(!showPicker);
   };
 
-  const handelCountryPhoneChange = ({ code, dial_code }) => {
-    setCode(code);
-    setDial_Code(dial_code);
+  const handelCountryPhoneChange = (item) => {
+    setCode(item.code);
+    setDial_Code(item.dial_code);
+    setShowPicker(false);
   };
 
-  const handePhoneNumberChange = (e) => {
+  const handlePhoneNumberChange = (e) => {
     handleChangeText(dial_code + e);
   };
   return (
@@ -60,32 +61,28 @@ const PhoneNumberByCountry = ({
 
           <TextInput
             className="flex-1 font-semibold text-base"
-            value={value}
+            value={value.replace(dial_code, "")}
             placeholder={placeholder}
             placeholderTextColor="#7b7b8b"
-            onChangeText={handePhoneNumberChange}
+            onChangeText={handlePhoneNumberChange}
             required={true}
             keyboardType="numeric"
             maxLength={9}
           />
         </View>
         {showPicker && items && (
-          <ScrollView horizontal={true}>
-            {items.map((item) => (
+          <FlatList
+            data={items}
+            renderItem={({ item }) => (
               <TouchableOpacity
                 key={item.dial_code}
-                onPress={() =>
-                  handelCountryPhoneChange({
-                    code: item.code,
-                    dial_code: item.dial_code,
-                  })
-                }
+                onPress={() => handelCountryPhoneChange(item)}
                 className="text-white-500 p-2 font-bold"
               >
                 <Text>{item.name}</Text>
               </TouchableOpacity>
-            ))}
-          </ScrollView>
+            )}
+          ></FlatList>
         )}
       </View>
     )

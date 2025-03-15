@@ -47,7 +47,7 @@ const DescoveryDemand = ({ demands }) => {
           //   key={numColumns}
 
           data={demands}
-          renderItem={({ item }) => <DesoveryDemandsSimplifed item={item} />}
+          renderItem={({ item ,index}) => <DesoveryDemandsSimplifed item={item} key={index}/>}
           keyExtractor={(item) => item.id.toString()}
           numColumns={2}
           //   pagingEnabled

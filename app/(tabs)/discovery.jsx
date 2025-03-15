@@ -40,8 +40,8 @@ const Discovery = () => {
     setShopes(shopesData);
   }, []);
   return (
-    <SafeAreaView className="bg-white-100">
-      <View className="flex flex-row items-center space-x-4 w-full h-[36px] px-4 bg-black-100 rounded-md border-[1px] border-white-300 focus:border-secondary">
+    <SafeAreaView className="bg-white-100 m-2">
+      <View className="flex flex-row items-center space-x-4 w-full h-[36px] px-4 bg-black-100 rounded-md border-[1px] border-white-500 focus:border-secondary">
        <TextInput
                 className="text-base mt-0.5 text-white flex-1 font-pregular"
                
@@ -49,7 +49,7 @@ const Discovery = () => {
                 placeholderTextColor="#CDCDE0"
                 onChangeText={(e) => isDemandsactive?demandFilter(e):shopFilter(e)}
               />
-        <Button onPress={()=>isDemandsactive?demandFilter():shopFilter()} title="Search"/>
+        <Button style={{backgroundColor:"#a6a746"}} onPress={()=>isDemandsactive?demandFilter():shopFilter()} title="Search" className="bg-white-500"/>
         </View>
       <DiscoveryOptions
         isDemandsactive={isDemandsactive}

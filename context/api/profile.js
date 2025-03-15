@@ -37,7 +37,7 @@ const getUserProfileData = async (userId, token) => {
   console.log(userId + "requested user id");
   try {
     const response = await axios.get(
-      `${baseURL}/profilePic/profile/${userId}`,
+      `${baseURL}/auth/profile/${userId}`,
       {
         headers: {
           "content-type": "multipart/form-data",

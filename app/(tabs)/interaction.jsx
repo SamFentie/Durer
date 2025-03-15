@@ -9,7 +9,7 @@ const Interaction = () => {
   }, []);
   return (
     intractions && (
-      <SafeAreaView className="bg-white-100">
+      <SafeAreaView className="bg-white-100 m-2">
         {intractions?<MainInteractions intractions={intractions} />:
         <Text>No Interaction Data.</Text>
         }

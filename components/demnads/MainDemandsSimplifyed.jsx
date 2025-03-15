@@ -118,11 +118,16 @@ const MainDemandsSimplifyed = ({
               {item.image_question? <Image
                 source={item.image_question }
                 resizeMode="contain"
-                className="w-full h-full"
+                className="w-full h-full rounded-md"
+                style={{
+                  width: "100%", // Make image take full width
+                  height: "100%", // Make image take full height of container
+                  resizeMode: "cover",
+                }}
               />:<Text>Image</Text> }
             </View>
           )}
-          <View className={item.image_question ? "w-2/3 pl-4" : "w-full"}>
+          <View className={item.image_question ? "w-2/3 pl-4 mt-5" : "w-full"}>
             <View>
               <Text>{item.text_question}</Text>
             </View>
@@ -181,9 +186,9 @@ const MainDemandsSimplifyed = ({
             source={images.shope}
             resizeMode="contain"
             tintColor="fff"
-            className="w-6 h-6"
+            className="w-6 h-6 mr-5"
           />
-          <View className="absolute top-[-10px] right-[2px] w-4 h-4 justify-center items-center p-[2px] bg-white-600 rounded-full z-90">
+          <View className="absolute right-[2px] w-4 h-4 justify-center items-center p-[2px] bg-white-600 rounded-full z-90">
             <Text
               className={
                 item.number_of_intreactions > 99

@@ -26,7 +26,10 @@ const config = {
   webClientId,
 };
 WebBrowser.maybeCompleteAuthSession();
-import { holdUserEmail, registerUser } from "../context/slices/authSlices";
+import {
+  holdPhaseOneReg,
+  registerUserPhaseOne,
+} from "../context/slices/authSlices";
 const SignUp = () => {
   const dispatch = useDispatch();
   const [form, setForm] = useState({
@@ -34,41 +37,35 @@ const SignUp = () => {
     user_name: "",
   });
   const [formError, setFormError] = useState("");
+  const [serverError, setServerError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [request, response, promptAsync] = Google.useAuthRequest(config);
 
   const handelEmailChange = (e) => {
     setForm({ ...form, email: e });
     setFormError("");
+    setServerError("");
     setIsSubmitting(false);
   };
   const handelUserNameChange = (e) => {
     setForm({ ...form, user_name: e });
     setFormError("");
+    setServerError("");
     setIsSubmitting(false);
   };
   const submit = (e) => {
-    if (!form.user_name) {
-      setFormError("Please enter Username");
-      setTimeout(() => setFormError(""), 3000);
-      return;
-    }
-    if (!form.email) {
-      setFormError("Please enter Email");
-      setTimeout(() => setFormError(""), 3000);
-      return;
-    }
     const fromData = { email: form.email, user_name: form.user_name };
     setIsSubmitting(true);
     activateAccount(fromData).then((res) => {
       setIsSubmitting(false);
-      if (res.error) {
-        setFormError(res.error);
+      if (res.data.err) {
+        setServerError(res.data.err);
       } else {
-        dispatch(holdUserEmail(fromData));
+        dispatch(registerUserPhaseOne(fromData));
         router.push("opt");
       }
     });
+    //dispatch(registerUserPhaseOne(fromData));
   };
 
   return (
@@ -81,6 +78,11 @@ const SignUp = () => {
           <Text className="font-interr text-white-600 text-base">
             Welcome! Please enter your details.
           </Text>
+          {serverError && (
+            <Text className="text-white-900 font-interr mt-2">
+              {serverError}
+            </Text>
+          )}
 
           <FormField
             title="User name"
@@ -98,14 +100,10 @@ const SignUp = () => {
             otherStyles="mt-7"
             keyboardType="email"
           />
-          {formError && (
-            <View className="w-full flex-row justify-center items-center mt-7">
-              <Text style={{ fontSize: 15, color: "red" }}>{formError}</Text>
-            </View>
-          )}
+
           <View className="mt-7 w-full">
             <CustomButton
-              title="Sign Up"
+              title="Next"
               handelPress={submit}
               isLoading={isSubmitting}
               containerStsyles="w-full bg-white-500"
@@ -121,16 +119,10 @@ const SignUp = () => {
             </Text>
           </TouchableOpacity>
           <View className="w-full h-14 px-4 rounded-2xl items-center mt-7 flex-row justify-center ">
-            <Text
-              style={{ fontSize: 15 }}
-              className="font-interr text-[12px] text-white-600"
-            >
+            <Text className="font-interr text-[12px] text-white-600">
               Already have an account?{" "}
             </Text>
-            <Text
-              style={{ fontSize: 18 }}
-              className="text-white-500 pl-[2px] font-interr"
-            >
+            <Text className="text-white-500 pl-[2px] font-interr">
               <Link href="/">Sign In</Link>
             </Text>
           </View>
