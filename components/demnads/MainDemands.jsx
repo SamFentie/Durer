@@ -7,7 +7,7 @@ const MainDemands = ({ demands ,children }) => {
   const [playingId, setPlayingId] = useState(null);
 
   return (
-    <View className="flex-1 my-2                                                    ">
+    <View className="flex-1">
       {demands ? (
         <FlatList
           className="mt-7"

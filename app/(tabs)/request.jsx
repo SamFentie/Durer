@@ -5,6 +5,7 @@ import Requests from "../../components/request/Requests";
 const Request = () => {
   return (
     <SafeAreaView className="bg-white-100">
+        
       <Requests />
     </SafeAreaView>
   );

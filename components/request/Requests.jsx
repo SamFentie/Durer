@@ -207,7 +207,8 @@ const Requests = () => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <View className="mt-7 mb-2">
+      <View className="mt-5">
+      <Text className="ext-lg font-interreb text-[20px] mb-[6px] mt-2 text-white-600 ml-4">Request</Text>
         <WhatDoYouWant wnats={wants} hnadelWantsChange={hnadelWantsChange} />
         <CategorizeYourRequest
           need_category={need_category}

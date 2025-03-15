@@ -15,6 +15,9 @@ import { logInUser } from "../context/api/api";
 import { logIn } from "../context/slices/authSlices";
 import Checkbox from "expo-checkbox";
 // import { useFonts } from "expo-font";
+import { LogBox } from "react-native";
+
+LogBox.ignoreAllLogs();
 
 const androidClientId =
   "91420296401-06bp7q8ir48m36i35csdsv1vube7ub91.apps.googleusercontent.com";

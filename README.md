@@ -7,3 +7,5 @@
 + Last Update
 + Profile Picture carosuel 
 + Page polishing
++ Edit profile and logout
++ Some Polishment

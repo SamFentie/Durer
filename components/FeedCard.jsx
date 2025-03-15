@@ -14,6 +14,7 @@ const FeedCard = ({ dummyFeedData }) => {
   const { width, height } = useWindowDimensions();
   const [sound, setSound] = useState();
   async function playSound(suoundata) {
+    if(suoundata){
     console.log("Loading Sound");
     const { sound } = await Audio.Sound.createAsync(suoundata);
 
@@ -21,6 +22,9 @@ const FeedCard = ({ dummyFeedData }) => {
 
     console.log("Playing Sound");
     await sound.playAsync();
+  } else {
+    return
+  }
   }
   return (
     dummyFeedData && (

@@ -6,21 +6,19 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React, { useEffect, useState} from "react";
+import React, {useState} from "react";
 import { useIsFocused } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { icons } from "../../constants";
 import MainDemands from "../../components/demnads/MainDemands";
 import moment from "moment";
-import { SIZES, COLORS, FONTS } from "../../constants/theme";
-import { demandData } from "../../demandsData";
-import LogoutButton from "../../components/LogoutButton";
+import { SIZES, COLORS} from "../../constants/theme";
+
 import images from "../../constants/images";
-import { getLocalUser } from "../../context/slices/authSlices";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getUserProfile } from "../../context/api/api";
-import { getUserInfo } from "../../utils/user";
 import ImageCarousel from "../../components/profile/ProfileImages";
 const sampleProfileData = {
   id: "sample-id",
@@ -308,7 +306,9 @@ const Profile = () => {
      
       <MainDemands demands={sampleProfileData.demands} >
         {/* Shop Logo Section */}
+
         <View>
+        <Text className="ext-lg font-interreb text-[20px] mb-[6px] mt-2 text-white-600 ml-4">Profile</Text>
         <ImageCarousel images={sampleProfileData.profilePictures}/>
         {/* Company Info Section */}
         <View className="mt-4">
@@ -369,8 +369,9 @@ const Profile = () => {
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.actionButton, styles.actionButtonIcon]}
+              onPress={() => router.push("createProfileUsRegularUser")}
             >
-              <LogoutButton/>
+             <Text style={styles.actionButtonTextSecondary}>Edit</Text>
             </TouchableOpacity>
           </View>
         </View>

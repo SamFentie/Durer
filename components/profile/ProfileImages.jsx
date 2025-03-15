@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Image, TouchableOpacity, Text, StyleSheet, Dimensions } from "react-native";
-
+import LogoutButton from "../LogoutButton";
 
   
 
@@ -26,10 +26,15 @@ const ImageCarousel = ({images}) => {
         <Image source={{ uri: images[currentIndex] }} style={styles.image}className="rounded-md" />
 
         {/* Image Index Display */}
-        <View style={styles.indexContainer} className="ml-4">
-          <Text style={styles.indexText}>{`${currentIndex + 1} / ${images.length}`}</Text>
+        <View className="w-[100%] flex-row justify-between" style={styles.topBar}>
+            <View style={styles.indexContainer} className="ml-4 flex justify-between">
+                <Text style={styles.indexText}>{`${currentIndex + 1} / ${images.length}`}</Text>
+            </View>
+            <View style={styles.indexContainer} className="rounded-full">
+                <LogoutButton/>
+            </View>
+            
         </View>
-
         {/* Navigation Buttons */}
         <TouchableOpacity style={[styles.button, styles.leftButton]} onPress={prevImage}>
           <Text style={styles.buttonText}>{"<"}</Text>
@@ -81,13 +86,22 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   indexContainer: {
-    position: "absolute",
-    top: 10, // Position at the top
-    alignSelf: "start", // Center horizontally
+    
+   // Center horizontally
     backgroundColor: "rgba(255, 255, 255, 0.8)", // White background with transparency
     paddingHorizontal: 12,
-    paddingVertical: 6,
+    paddingVertical: 2,
     borderRadius: 20, // Rounded corners
+  },
+  loguoutContiner:{
+    backgroundColor: "rgba(255, 255, 255, 0.8)", // White background with transparency
+    padding:2,
+    width:10,
+    height:10 
+  },
+  topBar:{
+    position:"absolute",
+    top:10
   },
   indexText: {
     fontSize: 14,
