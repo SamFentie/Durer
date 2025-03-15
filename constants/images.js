@@ -22,8 +22,12 @@ import expandup from "../assets//images/expandup.png";
 import share from "../assets//images/SHARE.png";
 import followShop from "../assets/images/followshop.png";
 import expandright from "../assets/images/expandright.png";
+import bookmark from "../assets/icons/bookmark.png"
+import save from "../assets/images/SAVE.png"
 
 export default {
+  save,
+  bookmark,
   profile,
   audio,
   camera,

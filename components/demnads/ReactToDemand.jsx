@@ -64,7 +64,17 @@ const ReactToDemand = ({
         <Text className="text-[16px] font-semibold">We can prepare</Text>
       </TouchableOpacity>
       <View className="flex-row items-center gap-1">
-        <TouchableOpacity onPress={onShare} className="bg-white-400 ">
+        <TouchableOpacity onPress={onShare} className=" ">
+          <Image
+            source={images.save}
+            resizeMode="contain"
+            tintColor="fff"
+            className="w-6 h-6"
+          />
+        </TouchableOpacity>
+      </View>
+      <View className="flex-row items-center gap-1">
+        <TouchableOpacity onPress={onShare} className=" ">
           <Image
             source={images.share}
             resizeMode="contain"
