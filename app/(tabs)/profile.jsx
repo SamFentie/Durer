@@ -46,6 +46,7 @@ const Profile = () => {
   const router = useRouter();
   const [expandedSection, setExpandedSection] = useState(null);
   const [userInformation,setUserInformation]=useState()
+  const [seeDemand,setSeeDemand]=useState(false)
   const isFocused = useIsFocused();
   const getUserInfo = async () => {
     const userIn= await AsyncStorage.getItem("user_info").then(setUserInformation(getUserProfile(user["data"]["id"],user["data"]["token"])));
@@ -197,7 +198,7 @@ const Profile = () => {
     <SafeAreaView className="flex-1 rounded-md">
      
      
-      <MainDemands demands={sampleProfileData[0].demands} >
+      <MainDemands demands={sampleProfileData[0].demands} see={seeDemand}>
         {/* Shop Logo Section */}
 
         <View className="mx-7 ">
@@ -318,16 +319,16 @@ const Profile = () => {
         </View>
 
         {/* Demands Section */}
-        <View className="mt-4 mb-6 w-full items-center">
+        <TouchableOpacity className="mt-4 mb-6 w-full items-center" onPress={()=>setSeeDemand(!seeDemand)}>
           <View className="flex-row items-center mb-2">
             <Image
-              source={icons.eyeHide}
+              source={seeDemand?icons.eye:icons.eyeHide}
               style={{ width: 24, height: 24 }}
               resizeMode="contain"
             />
             <Text className="ml-2 font-bold">Demands</Text>
           </View>
-        </View>
+        </TouchableOpacity>
         </View>
         </MainDemands>
     

@@ -2,7 +2,7 @@ import { FlatList, StyleSheet,  View ,Text} from "react-native";
 import React, { useState } from "react";
 import MainDemandsSimplifyed from "./MainDemandsSimplifyed";
 
-const MainDemands = ({ demands ,children }) => {
+const MainDemands = ({ see=true,demands ,children }) => {
   const [currentSound, setCurrentSound] = useState(null);
   const [playingId, setPlayingId] = useState(null);
 
@@ -14,15 +14,16 @@ const MainDemands = ({ demands ,children }) => {
           data={demands}
           ListHeaderComponent={children}
           renderItem={({ item, index }) => (
-            <MainDemandsSimplifyed
-              item={item}
-              key={index}
-              currentSound={currentSound}
-              setCurrentSound={setCurrentSound}
-              playingId={playingId}
-              setPlayingId={setPlayingId}
-            />
-            
+            <>
+              {see&&  <MainDemandsSimplifyed
+                  item={item}
+                  key={index}
+                  currentSound={currentSound}
+                  setCurrentSound={setCurrentSound}
+                  playingId={playingId}
+                  setPlayingId={setPlayingId}
+                />}
+            </>
           )}
           showsVerticalScrollIndicator={false}
         />
