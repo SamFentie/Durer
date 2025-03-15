@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     position: "relative", // Allows absolute positioning of elements
-    width: (width-10), // Full screen width
+    width: (width-60), // Full screen width
     height: 200,
     margin:2, // Adjust height as needed
   },

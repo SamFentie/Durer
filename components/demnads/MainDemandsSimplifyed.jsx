@@ -96,7 +96,7 @@ const MainDemandsSimplifyed = ({
     setIsEnabled(!isEnabled)
  }
   return (
-    <View className="mb-4 mx-2">
+    <View className="mb-4">
       <View
         className="bg-white-400 rounded-md p-4 relative shadow-md"
         style={{
@@ -113,7 +113,7 @@ const MainDemandsSimplifyed = ({
       >
         <View className="flex-row justify-between max-h-80">
           {item.image_question && (
-            <View className="w-1/3 max-h-32 rounded-lg border-2 border-white-500">
+            <View className="w-1/3 max-h-24 rounded-lg border-2 border-white-500">
               
               {item.image_question? <Image
                 source={item.image_question }

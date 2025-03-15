@@ -41,7 +41,6 @@ const Discovery = () => {
   }, []);
   return (
     <SafeAreaView className="bg-white-100 m-2">
-      <Text className="ext-lg font-interreb text-[20px] mb-[6px] mt-2 text-white-600 ml-4">Discovery</Text>
       <View className="flex flex-row items-center space-x-4 w-full h-[36px] px-4 bg-black-100 rounded-md border-[1px] border-white-500 focus:border-secondary">
        <TextInput
                 className="text-base mt-0.5 text-white flex-1 font-pregular"

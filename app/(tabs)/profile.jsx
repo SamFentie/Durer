@@ -12,122 +12,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { icons } from "../../constants";
 import MainDemands from "../../components/demnads/MainDemands";
-import moment from "moment";
+
 import { SIZES, COLORS} from "../../constants/theme";
 
-import images from "../../constants/images";
+
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getUserProfile } from "../../context/api/api";
 import ImageCarousel from "../../components/profile/ProfileImages";
-const sampleProfileData = {
-  id: "sample-id",
-  companyName: "Company name",
-  bio: "Bio/slogan",
-  productService: "Product or service",
-  profilePictures:[
-      "https://media.istockphoto.com/id/814423752/photo/eye-of-model-with-colorful-art-make-up-close-up.jpg?s=612x612&w=0&k=20&c=l15OdMWjgCKycMMShP8UK94ELVlEGvt7GmB_esHWPYE=",
-      "https://images.unsplash.com/photo-1575936123452-b67c3203c357?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D",
-      "https://cdn3.pixelcut.app/7/20/uncrop_hero_bdf08a8ca6.jpg",
-    ],
-  stats: {
-    following: "238",
-    followers: "55.7K",
-    rating: 4.5
-  },
-  contacts: {
-    phone: "+251911223344",
-    email: "company@example.com",
-    website: "www.company.com"
-  },
-  address: {
-    street: "Bole Road",
-    city: "Addis Ababa",
-    country: "Ethiopia"
-  },
-  socialMedia: {
-    facebook: "company.facebook",
-    twitter: "company.twitter",
-    instagram: "company.instagram"
-  },
-  productServices: [
-    "Product 1",
-    "Service 1",
-    "Product 2",
-    "Service 2"
-  ],
-  licenses: [
-    {
-      name: "Business License",
-      number: "LIC123456"
-    },
-    {
-      name: "Trade Certificate",
-      number: "CERT789012"
-    }
-  ],
-  demands: [
-    {
-        status: false,
-        id: 1,
-        text_question: "I need drone camera for 4 days rent June 8- June 11",
-        image_question: images.testimage,
-        voice_question:
-          "https://assets.mixkit.co/active_storage/sfx/995/995-preview.mp3",
-        further_question: [
-          " how much is the price?",
-          "how much is the price?",
-          "how much is the price?",
-        ],
-        demand_category: ["Clothing", "dgsahdsdsadbsdsdbscccc", "Designer"],
-        is_answered: "#Designer #dgsahdsdsadbsdsdbscccc",
-        user: "Siham Joo",
-        user_profile: images.profile,
-        number_of_intreactions: 3,
-        createdAt: moment(new Date(), "YYYYMMDD").fromNow(),
-      },
-      {
-        status: true,
-        id: 2,
-        text_question:
-          "I need a green Fancy dress for photo shoot. I need a expert designer to design the dress. I need it for May  0",
-        image_question: images.shope,
-        voice_question: null,
-        further_question: [
-          " how much is the price?",
-          "how much is the price?",
-          "how much is the price?",
-        ],
-        demand_category: ["Designer", "Designer", "Designer"],
-        is_answered: "#Designer #clothing",
-        user: "Amand Joo",
-        user_profile: images.profile,
-        number_of_intreactions: 126,
-        createdAt: moment(new Date(), "YYYYMMDD").fromNow(),
-      },
-      {
-        status: true,
-        id: 3,
-        text_question:
-          "I need a green Fancy dress for photo shoot. I need a expert designer to design the dress. I need it for May  0",
-    
-        image_question: null,
-        voice_question:
-          "https://assets.mixkit.co/active_storage/sfx/1714/1714-preview.mp3",
-        further_question: [
-          " how much is the price?",
-          "how much is the price?",
-          "how much is the price?",
-        ],
-        demand_category: ["Designer", "Designer", "Designer"],
-        is_answered: "#Designer #clothing",
-        user: "Siham Joo",
-        user_profile: images.profile,
-        number_of_intreactions: 67,
-        createdAt: moment(new Date(), "YYYYMMDD").fromNow(),
-      },
-  ]
-}; 
+import sampleProfileData from "../../sampleUserProfile"
 
 const PropertyCard = ({ title, icon, isExpanded, onPress, children }) => (
   <TouchableOpacity
@@ -170,16 +63,16 @@ const Profile = () => {
     <View style={styles.infoContent}>
       <View style={styles.infoRow}>
         <Image source={icons.phone} style={styles.infoIcon} />
-        <Text style={styles.infoText}>{sampleProfileData.contacts.phone}</Text>
+        <Text style={styles.infoText}>{sampleProfileData[0].contacts.phone}</Text>
       </View>
       <View style={styles.infoRow}>
         <Image source={icons.email} style={styles.infoIcon} />
-        <Text style={styles.infoText}>{sampleProfileData.contacts.email}</Text>
+        <Text style={styles.infoText}>{sampleProfileData[0].contacts.email}</Text>
       </View>
       <View style={styles.infoRow}>
         <Image source={icons.web} style={styles.infoIcon} />
         <Text style={styles.infoText}>
-          {sampleProfileData.contacts.website}
+          {sampleProfileData[0].contacts.website}
         </Text>
       </View>
     </View>
@@ -191,11 +84,11 @@ const Profile = () => {
         <Image source={icons.location} style={styles.infoIcon} />
         <View>
           <Text style={styles.infoText}>
-            {sampleProfileData.address.street}
+            {sampleProfileData[0].address.street}
           </Text>
-          <Text style={styles.infoText}>{sampleProfileData.address.city}</Text>
+          <Text style={styles.infoText}>{sampleProfileData[0].address.city}</Text>
           <Text style={styles.infoText}>
-            {sampleProfileData.address.country}
+            {sampleProfileData[0].address.country}
           </Text>
         </View>
       </View>
@@ -248,7 +141,7 @@ const Profile = () => {
             style={styles.infoIcon}
           />
           <Text style={styles.infoText}>
-            {sampleProfileData.socialMedia.facebook}
+            {sampleProfileData[0].socialMedia.facebook}
           </Text>
         </View>
         <View style={styles.infoRow}>
@@ -257,7 +150,7 @@ const Profile = () => {
             style={styles.infoIcon}
           />
           <Text style={styles.infoText}>
-            {sampleProfileData.socialMedia.twitter}
+            {sampleProfileData[0].socialMedia.twitter}
           </Text>
         </View>
         <View style={styles.infoRow}>
@@ -266,7 +159,7 @@ const Profile = () => {
             style={styles.infoIcon}
           />
           <Text style={styles.infoText}>
-            {sampleProfileData.socialMedia.instagram}
+            {sampleProfileData[0].socialMedia.instagram}
           </Text>
         </View>
       </View>
@@ -275,7 +168,7 @@ const Profile = () => {
 
   const renderProductServices = () => (
     <View style={styles.infoContent}>
-      {sampleProfileData.productServices.map((item, index) => (
+      {sampleProfileData[0].productServices.map((item, index) => (
         <View key={index} style={styles.infoRow}>
           <Image source={icons.product} style={styles.infoIcon} />
           <Text style={styles.infoText}>{item}</Text>
@@ -286,7 +179,7 @@ const Profile = () => {
 
   const renderLicenses = () => (
     <View style={styles.infoContent}>
-      {sampleProfileData.licenses.map((license, index) => (
+      {sampleProfileData[0].licenses.map((license, index) => (
         <View key={index} style={styles.infoRow}>
           <Image source={icons.license} style={styles.infoIcon} />
           <View>
@@ -301,36 +194,36 @@ const Profile = () => {
   );
 
   return (
-    <SafeAreaView className="bg-white-100 flex-1 mx-1 rounded-md">
+    <SafeAreaView className="flex-1 mx-7 rounded-md">
      
      
-      <MainDemands demands={sampleProfileData.demands} >
+      <MainDemands demands={sampleProfileData[0].demands} >
         {/* Shop Logo Section */}
 
         <View>
-        <Text className="ext-lg font-interreb text-[20px] mb-[6px] mt-2 text-white-600 ml-4">Profile</Text>
-        <ImageCarousel images={sampleProfileData.profilePictures}/>
+       
+        <ImageCarousel images={sampleProfileData[0].profilePictures}/>
         {/* Company Info Section */}
         <View className="mt-4">
           <Text className="text-lg font-bold">
-            {sampleProfileData.companyName}
+            {sampleProfileData[0].companyName}
           </Text>
-          <Text className="text-sm text-gray-500">{sampleProfileData.bio}</Text>
+          <Text className="text-sm text-gray-500">{sampleProfileData[0].bio}</Text>
           <Text className="text-sm text-gray-500">
-            {sampleProfileData.productService}
+            {sampleProfileData[0].productService}
           </Text>
 
           <View className="flex-row justify-between items-center mt-4">
             <View className="items-center">
               <Text className="text-sm text-gray-500">Following</Text>
               <Text className="font-bold">
-                {sampleProfileData.stats.following}
+                {sampleProfileData[0].stats.following}
               </Text>
             </View>
             <View className="items-center">
               <Text className="text-sm text-gray-500">Followers</Text>
               <Text className="font-bold">
-                {sampleProfileData.stats.followers}
+                {sampleProfileData[0].stats.followers}
               </Text>
             </View>
             <View className="items-center">
@@ -341,7 +234,7 @@ const Profile = () => {
                     key={i}
                     style={{
                       color:
-                        i < Math.floor(sampleProfileData.stats.rating)
+                        i < Math.floor(sampleProfileData[0].stats.rating)
                           ? "#FFD700"
                           : "#D3D3D3",
                     }}
@@ -369,7 +262,7 @@ const Profile = () => {
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.actionButton, styles.actionButtonIcon]}
-              onPress={() => router.push("createProfileUsRegularUser")}
+              onPress={() => router.push(`editprofile/${sampleProfileData[0].id}`)}
             >
              <Text style={styles.actionButtonTextSecondary}>Edit</Text>
             </TouchableOpacity>
@@ -425,7 +318,7 @@ const Profile = () => {
         </View>
 
         {/* Demands Section */}
-        <View className="mt-4 mb-6">
+        <View className="mt-4 mb-6 w-full items-center">
           <View className="flex-row items-center mb-2">
             <Image
               source={icons.eyeHide}

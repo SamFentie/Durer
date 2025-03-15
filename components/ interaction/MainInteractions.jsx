@@ -6,7 +6,7 @@ import { SafeAreaView } from "react-native";
 const MainInteractions = ({ intractions }) => {
   return (
     <SafeAreaView className="mx-2 mt-3">
-        <Text className="ext-lg font-interreb text-[20px] mb-[6px] mt-2 text-white-600 ml-4">Interaction</Text>
+       
       {intractions && (
         <FlatList
           className="mt-1"

@@ -40,8 +40,8 @@ const Demands = () => {
   }, [dispatch]);
 
   return (
-    <View className="flex-1 bg-white-400">
-      <View className="flex-1 pt-4">
+    <View className="flex-1 px-5">
+      <View className="flex-1 pt-4 ">
         {loading ? (
           <View className="flex-1 justify-center items-center">
             <Text>Loading...</Text>
@@ -57,7 +57,7 @@ const Demands = () => {
         ) : (
           
           <MainDemands demands={demand} >
-            <Text className="ext-lg font-interreb text-[20px] mb-[6px] mt-2 text-white-600 ml-4">Demands</Text>
+           <></>
           </MainDemands>
         )}
       </View>

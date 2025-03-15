@@ -8,4 +8,5 @@
 + Profile Picture carosuel 
 + Page polishing
 + Edit profile and logout
-+ Some Polishment
+~ Some Polishment
++ Edit profile page
