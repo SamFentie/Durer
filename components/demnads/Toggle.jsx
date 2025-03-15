@@ -19,7 +19,8 @@ export default function ToogleButton({status}) {
     Animated.timing(positionButton,{
       toValue:0,
       duration:500,
-      easing:Easing.ease
+      easing:Easing.ease,
+      useNativeDriver: false
     }).start()
   };
 
@@ -27,7 +28,8 @@ export default function ToogleButton({status}) {
  Animated.timing(positionButton,{
       toValue:1,
       duration:500,
-      easing:Easing.ease
+      easing:Easing.ease,
+      useNativeDriver: false
     }).start()
 
   };

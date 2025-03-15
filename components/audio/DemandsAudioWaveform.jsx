@@ -63,7 +63,7 @@ const DemandsAudioWaveform = ({ uri }) => {
 
   const animatedIndicatorStyle = useAnimatedStyle(() => ({
     left: `${progress}%`,
-  }));
+  }),[progress]);
 
   const samples = [
     0, 61, 69, 0, 113, 117, 113, 3, 200, 400, 15, 28, 0, 400, 116, 2, 122, 19,
@@ -124,8 +124,11 @@ const DemandsAudioWaveform = ({ uri }) => {
           ))}
         </View>
         <Animated.View
-          style={[styles.playbackIndicator, animatedIndicatorStyle]}
-        />
+  style={[
+    styles.playbackIndicator, 
+    animatedIndicatorStyle
+  ]}
+/>
       </View>
     </View>
   );
